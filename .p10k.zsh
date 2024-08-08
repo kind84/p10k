@@ -95,6 +95,7 @@
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     ecli                    # current keeneye ecli profile
+    mcli 	   	    # majelan-cli
     time                    # current time
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
@@ -1617,6 +1618,7 @@
     p10k segment -b 1 -f 3 -i '⭐' -t 'hello, %n'
   }
 
+  # ecli
   function prompt_ecli() {
     eclienv=`ecli profile current | head -n 1 |  sed 's/.*\"\([^\"]*\)\".*/\1/'`
     p10k segment -t "$eclienv" -i '🔬'
@@ -1625,6 +1627,15 @@
   typeset -g POWERLEVEL9K_ECLI_FOREGROUND=226
   typeset -g POWERLEVEL9K_ECLI_BACKGROUND=55
   typeset -g POWERLEVEL9K_ECLI_SHOW_ON_COMMAND='ecli'
+
+  # majelan-cli
+  function prompt_mcli() {
+    p10k segment -i '〽️'
+  }
+
+  typeset -g POWERLEVEL9K_MCLI_FOREGROUND=226
+  typeset -g POWERLEVEL9K_MCLI_BACKGROUND=55
+  typeset -g POWERLEVEL9K_MCLI_SHOW_ON_COMMAND='majelan-cli'
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
   # is to generate the prompt segment for display in instant prompt. See
@@ -1647,6 +1658,10 @@
 
   function instant_prompt_ecli() {
     prompt_ecli
+  }
+
+  function instant_prompt_mcli() {
+    prompt_mcli
   }
 
   # User-defined prompt segments can be customized the same way as built-in segments.
